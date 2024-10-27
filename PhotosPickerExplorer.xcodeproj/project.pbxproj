@@ -11,6 +11,7 @@
 		BE3870232CCB8E2E001B3A15 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3870222CCB8E2E001B3A15 /* ContentView.swift */; };
 		BE3870252CCB8E2F001B3A15 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BE3870242CCB8E2F001B3A15 /* Assets.xcassets */; };
 		BE3870282CCB8E2F001B3A15 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BE3870272CCB8E2F001B3A15 /* Preview Assets.xcassets */; };
+		BE38702F2CCD4BF5001B3A15 /* CircleImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE38702E2CCD4BF5001B3A15 /* CircleImage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +20,7 @@
 		BE3870222CCB8E2E001B3A15 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		BE3870242CCB8E2F001B3A15 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BE3870272CCB8E2F001B3A15 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		BE38702E2CCD4BF5001B3A15 /* CircleImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleImage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +54,7 @@
 			isa = PBXGroup;
 			children = (
 				BE3870202CCB8E2E001B3A15 /* PhotosPickerExplorerApp.swift */,
+				BE38702E2CCD4BF5001B3A15 /* CircleImage.swift */,
 				BE3870222CCB8E2E001B3A15 /* ContentView.swift */,
 				BE3870242CCB8E2F001B3A15 /* Assets.xcassets */,
 				BE3870262CCB8E2F001B3A15 /* Preview Content */,
@@ -139,6 +142,7 @@
 			files = (
 				BE3870232CCB8E2E001B3A15 /* ContentView.swift in Sources */,
 				BE3870212CCB8E2E001B3A15 /* PhotosPickerExplorerApp.swift in Sources */,
+				BE38702F2CCD4BF5001B3A15 /* CircleImage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
