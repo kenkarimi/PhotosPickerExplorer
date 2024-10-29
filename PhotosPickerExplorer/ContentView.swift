@@ -22,6 +22,7 @@ struct ContentView: View {
     @State private var imageCreatedFromUIImage: Image?
     @State private var imageCreatedFromBase64String: Image?
     @State private var base64StringCreatedFromUIImage: String = ""
+    @State private var image_source: GlobalEnumerations.ImageSource = .name
     
     var body: some View {
         VStack(alignment: .center) {
@@ -90,16 +91,21 @@ struct ContentView: View {
             //EXAMPLE ONE: loadTransferable's type is Image.self so loaded is of type Image. As such, we use the ImageRenderer, which takes in a SwiftUI View(Image is a View) to convert the SwiftUI Image to a UIKit UIImage. The UIImage can then be converted into an object of type Data & then into a Base64 String from the compressed Data like we did with UIKits UIImage in the example above. More: https://developer.apple.com/documentation/swiftui/imagerenderer
             PhotosPicker(selection: $selectedImage, matching: .images, label: {
                 if imageItem == nil { //Don't show if an image has been selected.
-                    Image("account_circle")
-                        .foregroundStyle(Color.black)
-                        .font(Font.system(size: 100, weight: .regular))
+                    CircleImage(
+                        image_source: .name,
+                        image_name: "account_circle",
+                        image_url: "",
+                        image: nil,
+                        points: 100
+                    )
                 } else if imageItem != nil {
-                    imageItem?
-                        .resizable()
-                        .frame(width: 100, height: 100)
-                        .clipShape(Circle())
-                        .padding(.top, 0)
-                    //CircleImage(image_url: "", points: 150)
+                    CircleImage(
+                        image_source: .gallery,
+                        image_name: "",
+                        image_url: "",
+                        image: imageItem,
+                        points: 100
+                    )
                 }
             })
             .onChange(of: selectedImage) { oldValue, newValue in //selectedImage is optional.
@@ -127,16 +133,21 @@ struct ContentView: View {
             //EXAMPLE TWO: loadTransferable's type is Data.self so loaded is of type Data. Instead of using the ImageRenderer like we did above to convert the SwiftUI Image to a UIKit UIImage, this method is simpler because we convert the Data itself to a UIImage. The UIImage can then be converted into an object of type Data that is even more compressed & then into a Base64 String from the compressed Data. More: https://www.reddit.com/r/swift/comments/1e2jm36/how_do_i_convert_a_swiftui_image_to_data/?rdt=43761
             PhotosPicker(selection: $selectedImage2, matching: .images, label: {
                 if imageItem2 == nil { //Don't show if an image has been selected.
-                    Image("account_circle")
-                        .foregroundStyle(Color.black)
-                        .font(Font.system(size: 100, weight: .regular))
+                    CircleImage(
+                        image_source: .name,
+                        image_name: "account_circle",
+                        image_url: "",
+                        image: nil,
+                        points: 100
+                    )
                 } else if imageItem2 != nil {
-                    imageItem2?
-                        .resizable()
-                        .frame(width: 100, height: 100)
-                        .clipShape(Circle())
-                        .padding(.top, 0)
-                    //CircleImage(image_url: "", points: 150)
+                    CircleImage(
+                        image_source: .gallery,
+                        image_name: "",
+                        image_url: "",
+                        image: imageItem2,
+                        points: 100
+                    )
                 }
             })
             .onChange(of: selectedImage2) { oldValue, newValue in //If selectedImage3 has changed, then it's no longer empty so just force unwrap.
@@ -160,12 +171,6 @@ struct ContentView: View {
                 Text("Base64 String:")
             }
         } //VStack
-        .onAppear {
-            let renderer: ImageRenderer = ImageRenderer(content: Image("account_circle")) //or content: createImageView
-            if let uiImage: UIImage = renderer.uiImage {
-                
-            }
-        }
     }
     
     func createImageView() -> some View { //Unused. Returns the View Image(_ name)
