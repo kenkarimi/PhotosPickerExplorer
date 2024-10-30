@@ -26,7 +26,7 @@ struct CircleImage: View {
                     Circle().stroke(Color.gray, lineWidth: 1) //Won't be noticeable with default image 'account_circle' since border already black but can be seen on any other image.
                 }
         } else if image_source == .url {
-            //Aptly called Asynchronous Image. The AsyncImage will simply show a default gray placeholder if the URL string is invalid. And if the image can’t be loaded for some reason – if the user is offline, or if the image doesn’t exist – then the system will continue showing the same placeholder image.
+            //Aptly called Asynchronous Image. The AsyncImage will simply show a default gray placeholder if the URL string is invalid. And if the image can’t be loaded for some reason – if the user is offline, or if the image doesn’t exist – then the system will continue showing the same placeholder image. More: https://www.hackingwithswift.com/quick-start/swiftui/how-to-load-a-remote-image-from-a-url
             AsyncImage(url: URL(string: image_url)) { image in
                 image.resizable() //Resulting image and the placeholder color are now resizable
             } placeholder: { //While url is loading, AsyncImage uses a red placeholder color over the frame.

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		BE0E9BC92CD17AE80003B1C4 /* GlobalEnumerations.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0E9BC82CD17AE80003B1C4 /* GlobalEnumerations.swift */; };
+		BE0E9BCB2CD23A820003B1C4 /* ProfilePic.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0E9BCA2CD23A820003B1C4 /* ProfilePic.swift */; };
 		BE3870212CCB8E2E001B3A15 /* PhotosPickerExplorerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3870202CCB8E2E001B3A15 /* PhotosPickerExplorerApp.swift */; };
 		BE3870232CCB8E2E001B3A15 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3870222CCB8E2E001B3A15 /* ContentView.swift */; };
 		BE3870252CCB8E2F001B3A15 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BE3870242CCB8E2F001B3A15 /* Assets.xcassets */; };
@@ -17,6 +18,7 @@
 
 /* Begin PBXFileReference section */
 		BE0E9BC82CD17AE80003B1C4 /* GlobalEnumerations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalEnumerations.swift; sourceTree = "<group>"; };
+		BE0E9BCA2CD23A820003B1C4 /* ProfilePic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePic.swift; sourceTree = "<group>"; };
 		BE38701D2CCB8E2E001B3A15 /* PhotosPickerExplorer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotosPickerExplorer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE3870202CCB8E2E001B3A15 /* PhotosPickerExplorerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosPickerExplorerApp.swift; sourceTree = "<group>"; };
 		BE3870222CCB8E2E001B3A15 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -69,6 +71,7 @@
 				BE3870222CCB8E2E001B3A15 /* ContentView.swift */,
 				BE3870242CCB8E2F001B3A15 /* Assets.xcassets */,
 				BE3870262CCB8E2F001B3A15 /* Preview Content */,
+				BE0E9BCA2CD23A820003B1C4 /* ProfilePic.swift */,
 			);
 			path = PhotosPickerExplorer;
 			sourceTree = "<group>";
@@ -153,6 +156,7 @@
 			files = (
 				BE0E9BC92CD17AE80003B1C4 /* GlobalEnumerations.swift in Sources */,
 				BE3870232CCB8E2E001B3A15 /* ContentView.swift in Sources */,
+				BE0E9BCB2CD23A820003B1C4 /* ProfilePic.swift in Sources */,
 				BE3870212CCB8E2E001B3A15 /* PhotosPickerExplorerApp.swift in Sources */,
 				BE38702F2CCD4BF5001B3A15 /* CircleImage.swift in Sources */,
 			);

@@ -19,10 +19,15 @@ struct ContentView: View {
     @State private var selectedImage2: PhotosPickerItem?
     @State private var stringImage2: String?
     @State private var imageItem2: Image?
+    @State private var selectedImage3: PhotosPickerItem?
+    @State private var stringImage3: String?
+    @State private var imageItem3: Image?
+    
     @State private var imageCreatedFromUIImage: Image?
     @State private var imageCreatedFromBase64String: Image?
     @State private var base64StringCreatedFromUIImage: String = ""
     @State private var image_source: GlobalEnumerations.ImageSource = .name
+    @State private var image_url: String = "https://img.freepik.com/premium-psd/man-holding-up-phone-that-says-thumbs-up_382352-27775.jpg?w=996" //Alt image link: https://hws.dev/paul3.jpg
     
     var body: some View {
         VStack(alignment: .center) {
@@ -90,15 +95,15 @@ struct ContentView: View {
             
             //EXAMPLE ONE: loadTransferable's type is Image.self so loaded is of type Image. As such, we use the ImageRenderer, which takes in a SwiftUI View(Image is a View) to convert the SwiftUI Image to a UIKit UIImage. The UIImage can then be converted into an object of type Data & then into a Base64 String from the compressed Data like we did with UIKits UIImage in the example above. More: https://developer.apple.com/documentation/swiftui/imagerenderer
             PhotosPicker(selection: $selectedImage, matching: .images, label: {
-                if imageItem == nil { //Don't show if an image has been selected.
+                if imageItem == nil { //Show either the default image or the image url if there's no selected image.
                     CircleImage(
                         image_source: .name,
                         image_name: "account_circle",
-                        image_url: "",
+                        image_url: image_url,
                         image: nil,
                         points: 100
                     )
-                } else if imageItem != nil {
+                } else if imageItem != nil { //Image has been selected from gallery.
                     CircleImage(
                         image_source: .gallery,
                         image_name: "",
@@ -132,15 +137,15 @@ struct ContentView: View {
             
             //EXAMPLE TWO: loadTransferable's type is Data.self so loaded is of type Data. Instead of using the ImageRenderer like we did above to convert the SwiftUI Image to a UIKit UIImage, this method is simpler because we convert the Data itself to a UIImage. The UIImage can then be converted into an object of type Data that is even more compressed & then into a Base64 String from the compressed Data. More: https://www.reddit.com/r/swift/comments/1e2jm36/how_do_i_convert_a_swiftui_image_to_data/?rdt=43761
             PhotosPicker(selection: $selectedImage2, matching: .images, label: {
-                if imageItem2 == nil { //Don't show if an image has been selected.
+                if imageItem2 == nil { //Show either the default image or the image url if there's no selected image.
                     CircleImage(
                         image_source: .name,
                         image_name: "account_circle",
-                        image_url: "",
+                        image_url: image_url,
                         image: nil,
                         points: 100
                     )
-                } else if imageItem2 != nil {
+                } else if imageItem2 != nil { //Image has been selected from gallery.
                     CircleImage(
                         image_source: .gallery,
                         image_name: "",
@@ -165,6 +170,44 @@ struct ContentView: View {
             }
             if let stringImage2: String = stringImage2 {
                 Text("Base64 String:\n \(stringImage2)") //Creating a base64 String from a UIKit UIImage.
+                    .frame(height: 100) //String is too long.
+                    .truncationMode(.tail)
+            } else {
+                Text("Base64 String:")
+            }
+            
+            //ALTERNATIVE SOLUTION:
+            PhotosPicker(selection: $selectedImage3, matching: .images, label: {
+                if imageItem3 == nil { //Show either the default image(.name) or the image url if there's no selected image.
+                    ProfilePic(
+                        image_url: image_url,
+                        points: 100
+                    )
+                } else if imageItem3 != nil { //Image has been selected from gallery.
+                    imageItem3?
+                        .resizable()
+                        .frame(width: 100, height: 100)
+                        .clipShape(Circle())
+                        .overlay {
+                            Circle().stroke(Color.gray, lineWidth: 1) //Won't be noticeable with default image 'account_circle' since border already black but can be seen on any other image.
+                        }
+                }
+            })
+            .onChange(of: selectedImage3) { oldValue, newValue in //If selectedImage3 has changed, then it's no longer empty so just force unwrap.
+                Task { //Task is necessary because we can't pass function of type '(PhotosPickerItem?, PhotosPickerItem?) async -> Void' to parameter expecting synchronous function type
+                    if let loaded: Data = try? await newValue?.loadTransferable(type: Data.self) { //.loadTransferable(type: Data.self) asynchronously load an instance of Data from PhotosPickerItem and convert it into a 'Data' type.
+                        //stringImage = loaded.base64EncodedString() //We can convert the 'Data' into a base 64 string directly like so, but since we still need to display this 'Data' in type 'Image' and we also need to compress it, we convert it into an instance of UIKits UIImage first, which allows us to compress it with .jpegData(compressionQuality:) and display it with Image(uiImage:)
+                        guard let uiImage: UIImage = UIImage(data: loaded) else { return } //Turn Data into UIImage
+                        imageItem3 = Image(uiImage: uiImage) //Display Data as an instance of SwiftUI's 'Image'.
+                        guard let data: Data = uiImage.jpegData(compressionQuality: 20) else { return } //'loaded' is now compressed as jpeg data. pngData() also works but doesn't compress.
+                        stringImage3 = data.base64EncodedString() //Get the base 64 string of the compressed 'loaded'.
+                    } else {
+                        print("Image selection failed...")
+                    }
+                }
+            }
+            if let stringImage3: String = stringImage3 {
+                Text("Base64 String:\n \(stringImage3)") //Creating a base64 String from a UIKit UIImage.
                     .frame(height: 100) //String is too long.
                     .truncationMode(.tail)
             } else {
